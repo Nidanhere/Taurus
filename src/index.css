@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-editorial: 'Cinzel', 'Playfair Display', serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: #07080a;
+    color: #edece6;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #07080a;
+  }
+}
+
+/* Luxury Editorial Typography */
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+
+.font-serif-luxury {
+  font-family: var(--font-serif);
+}
+
+/* Subtle architectural lighting vignette — centered for stacked layout */
+.bg-luxury-vignette {
+  background: 
+    radial-gradient(ellipse 60% 50% at 50% 65%, rgba(176, 139, 82, 0.035) 0%, rgba(7, 7, 6, 0) 70%),
+    radial-gradient(ellipse 55% 55% at 50% 30%, rgba(30, 32, 36, 0.35) 0%, rgba(7, 7, 6, 1) 85%);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #07080a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2026;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2d3039;
+}
