@@ -5,15 +5,13 @@ export function Navbar({ navbarRef }) {
       className="fixed left-0 right-0 top-0 z-50 w-full border-b border-white/[0.045] bg-[#070706]/68 px-5 py-5 backdrop-blur-xl transition-all sm:px-10 lg:px-14 xl:px-16"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <a href="#" className="flex items-center gap-3.5" aria-label="Taurus Institute home">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[#b99d6e]/45 bg-[#11100d] font-editorial text-xs font-semibold tracking-widest text-[#f0e8d9]">
-            T
-          </div>
+        <a href="#" className="flex items-center gap-3.5" aria-label="TRUSTPIP Institute home">
+          <img src="/logo/tp.jpeg" alt="TRUSTPIP Logo" className="h-12 w-12 object-contain" />
           <div className="flex flex-col">
             <span className="font-editorial text-sm font-semibold uppercase tracking-[0.22em] text-[#f4efe4]">
-              TAURUS
+              TRUST<span className="text-green-500">pip</span>
             </span>
-            <span className="-mt-0.5 text-[9px] uppercase tracking-[0.28em] text-[#b99d6e]">
+            <span className="-mt-0.5 text-[9px] uppercase tracking-[0.28em] text-[#ffffff]">
               Institute
             </span>
           </div>

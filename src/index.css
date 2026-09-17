@@ -61,3 +61,19 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #2d3039;
 }
+
+/* Custom drop animation */
+@keyframes dropPulse {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.9;
+    filter: brightness(1.2);
+  }
+}
+
+.animate-drop-pulse {
+  animation: dropPulse 0.4s ease-in-out;
+}

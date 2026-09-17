@@ -45,15 +45,15 @@ function getSceneConfig(isMobile, isTablet) {
   };
 }
 
-function CameraRig({ basePosition, target, fov, reducedMotion, isMobile }) {
+function CameraRig({ basePosition, target, fov, reducedMotion, isMobile, pointer }) {
   const cameraRef = useRef(null);
   const lookAtTarget = useRef(new THREE.Vector3(...target));
 
   useFrame((state, delta) => {
     if (!cameraRef.current || reducedMotion || isMobile) return;
 
-    const targetX = basePosition[0] + state.pointer.x * 0.05;
-    const targetY = basePosition[1] + state.pointer.y * 0.02;
+    const targetX = basePosition[0] + pointer.x * 0.05;
+    const targetY = basePosition[1] + pointer.y * 0.02;
 
     cameraRef.current.position.x = THREE.MathUtils.lerp(cameraRef.current.position.x, targetX, delta * 2);
     cameraRef.current.position.y = THREE.MathUtils.lerp(cameraRef.current.position.y, targetY, delta * 2);
@@ -117,12 +117,14 @@ export function HeroScene({
   reducedMotion = false,
   onSceneReady,
   scrollProgress = 0,
+  pointer = { x: 0, y: 0 },
 }) {
   const config = getSceneConfig(isMobile, isTablet);
 
   return (
-    <div className="absolute inset-0 h-full w-full pointer-events-auto">
+    <div className="absolute inset-0 h-full w-full pointer-events-none">
       <Canvas
+        className="pointer-events-none"
         dpr={[1, 1.65]}
         gl={{
           antialias: true,
@@ -144,6 +146,7 @@ export function HeroScene({
           fov={config.cameraFov}
           reducedMotion={reducedMotion}
           isMobile={isMobile}
+          pointer={pointer}
         />
 
         <Environment preset="studio" environmentIntensity={0.45} />

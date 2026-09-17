@@ -4,6 +4,7 @@ import { HeroScene } from './HeroScene';
 import { HeroContent } from './HeroContent';
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import ShapeGrid from './ShapeGrid';
 
 export function Hero() {
   const containerRef = useRef(null);
@@ -11,9 +12,16 @@ export function Hero() {
   const headlineRef = useRef(null);
   const taglineRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [pointer, setPointer] = useState({ x: 0, y: 0 });
 
   const { isMobile, isTablet } = useWindowDimensions();
   const reducedMotion = usePrefersReducedMotion();
+
+  const handleMouseMove = (e) => {
+    const x = (e.clientX / window.innerWidth) * 2 - 1;
+    const y = -(e.clientY / window.innerHeight) * 2 + 1;
+    setPointer({ x, y });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,20 +97,35 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
+      onMouseMove={handleMouseMove}
       className="relative isolate flex min-h-screen w-full flex-col justify-between overflow-hidden bg-[#070706] text-[#f4efe4]"
     >
-      {/* 3D Scene filling the entire hero viewport for 100% background blending */}
+      {/* ShapeGrid background animation */}
       <div className="absolute inset-0 z-0 h-full w-full">
+        <ShapeGrid
+          speed={0.1}
+          squareSize={41}
+          direction="diagonal"
+          borderColor="#0BA16E"
+          hoverFillColor="#ffffff"
+          shape="square"
+          hoverTrailAmount={0}
+        />
+      </div>
+
+      {/* 3D Scene filling the entire hero viewport for 100% background blending */}
+      <div className="absolute inset-0 z-[1] h-full w-full pointer-events-none">
         <HeroScene
           isMobile={isMobile}
           isTablet={isTablet}
           reducedMotion={reducedMotion}
           scrollProgress={scrollProgress}
+          pointer={pointer}
         />
       </div>
 
       {/* Atmospheric lighting overlay seamlessly blending whole canvas */}
-      <div ref={atmosphereRef} className="pointer-events-none absolute inset-0 z-[1]">
+      <div ref={atmosphereRef} className="pointer-events-none absolute inset-0 z-[2]">
         <div className="absolute inset-0 bg-luxury-vignette opacity-80" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[45rem] w-[55rem] rounded-full bg-[#b08b52]/[0.035] blur-[180px]" />
         {/* Soft bottom vignette */}
@@ -110,7 +133,7 @@ export function Hero() {
       </div>
 
       {/* Headline Content placed on top of 3D canvas */}
-      <div className="relative z-10 flex flex-col items-center justify-center pt-28 sm:pt-36 md:pt-40 pointer-events-none">
+      <div className="relative z-[3] flex flex-col items-center justify-center pt-28 sm:pt-36 md:pt-40">
         <HeroContent
           headlineRef={headlineRef}
           taglineRef={taglineRef}
@@ -118,7 +141,7 @@ export function Hero() {
       </div>
 
       {/* Spacer for bottom breathing room */}
-      <div className="relative z-10 h-24 sm:h-32 pointer-events-none" />
+      <div className="relative z-[3] h-24 sm:h-32 pointer-events-none" />
     </section>
   );
 }
