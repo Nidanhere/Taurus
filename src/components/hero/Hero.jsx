@@ -12,7 +12,7 @@ export function Hero() {
   const headlineRef = useRef(null);
   const taglineRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const [pointer, setPointer] = useState({ x: 0, y: 0 }); 
 
   const { isMobile, isTablet } = useWindowDimensions();
   const reducedMotion = usePrefersReducedMotion();
